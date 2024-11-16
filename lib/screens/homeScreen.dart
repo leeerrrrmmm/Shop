@@ -1,8 +1,8 @@
+
 import 'package:flutter/material.dart';
+import 'package:yshop/components/myBottomBar.dart';
 import 'package:yshop/screens/shop.dart';
-
-import '../components/myBottomBar.dart';
-
+import 'cardPage.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Widget> _pages = [
     Shop(),
-    Card(),
+    CardPage(),
   ];
 
   @override

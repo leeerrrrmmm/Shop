@@ -4,7 +4,11 @@ import '../models/shoe.dart';
 
 class Shoetile extends StatelessWidget {
   Shoe shoe;
-  Shoetile({super.key, required this.shoe});
+  void Function()? onTap;
+  Shoetile({
+    super.key,
+    required this.shoe,
+    required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +26,15 @@ class Shoetile extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(shoe.imagePath),
           ),
-          Text(shoe.description
-              ,
-              style:TextStyle(
-                  fontSize: 17,
-                  fontWeight:FontWeight.bold
-              )),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: Text(shoe.description
+                ,
+                style:TextStyle(
+                    fontSize: 17,
+                    fontWeight:FontWeight.bold
+                )),
+          ),
          Row(
            mainAxisAlignment: MainAxisAlignment.spaceBetween,
            children: [
@@ -50,16 +57,19 @@ class Shoetile extends StatelessWidget {
                  ],
                ),
              ),
-             Container(
-               padding: EdgeInsets.all(20),
-               decoration: BoxDecoration(
-                 color: Colors.black,
-                 borderRadius: BorderRadius.only(
-                     topLeft:Radius.circular(12),
-                   bottomRight: Radius.circular(12),
-                 )
+             GestureDetector(
+              onTap: onTap ,
+               child: Container(
+                 padding: EdgeInsets.all(20),
+                 decoration: BoxDecoration(
+                   color: Colors.black,
+                   borderRadius: BorderRadius.only(
+                       topLeft:Radius.circular(12),
+                     bottomRight: Radius.circular(12),
+                   )
+                 ),
+                 child: Icon(Icons.add, color:Colors.white),
                ),
-               child: IconButton(onPressed: () {}, icon: Icon(Icons.add, color:Colors.white)),
              )
            ],
          )

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yshop/components/shoeTile.dart';
-
+import 'package:provider/provider.dart';
+import '../components/shoeTile.dart';
+import '../models/cart.dart';
 import '../models/shoe.dart';
 
 class Shop extends StatefulWidget {
@@ -11,9 +12,23 @@ class Shop extends StatefulWidget {
 }
 
 class _ShopState extends State<Shop> {
+
+  //add Shoe to cart
+  void addShoeToCart(Shoe shoe) {
+  Provider.of<Cart>(context, listen: false).addItemToCart(shoe);
+
+  //alert user, shoe success added
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Successfuly added to Cart'),
+        content: Text('Check your cart')
+      )
+    );
+  }
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Consumer<Cart>(builder: (context, value, child) => Column(
       children: [
         Container(
           padding: EdgeInsets.all(12),
@@ -60,24 +75,22 @@ class _ShopState extends State<Shop> {
           ),
         ),
         const SizedBox(height: 10),
-
+        //List of shoes for sale
         Expanded(
           child: ListView.builder(
             itemCount:4,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              Shoe shoe = Shoe(
-                name: 'BrownDunk',
-                price: '280',
-                description: 'New collection',
-                imagePath: 'lib/images/brownDunk.png',
-              );
-              return Shoetile(shoe: shoe);
+              // get a Shoe from shop list
+              Shoe shoe = value.getShoeList()[index];
+              return Shoetile(
+                  shoe: shoe,
+                  onTap: () => addShoeToCart(shoe));
             },
           ),
         ),
         Padding(padding: EdgeInsets.only(top:25),)
       ],
-    );
+    ));
   }
 }
