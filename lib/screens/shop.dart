@@ -67,7 +67,7 @@ class _ShopState extends State<Shop> {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               Shoe shoe = Shoe(
-                name: 'Dunk',
+                name: 'BrownDunk',
                 price: '280',
                 description: 'New collection',
                 imagePath: 'lib/images/brownDunk.png',
