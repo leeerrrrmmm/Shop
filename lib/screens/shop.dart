@@ -63,7 +63,8 @@ class _ShopState extends State<Shop> {
 
         Expanded(
           child: ListView.builder(
-            itemCount: 4,
+            itemCount:4,
+            scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               Shoe shoe = Shoe(
                 name: 'Dunk',
@@ -75,6 +76,7 @@ class _ShopState extends State<Shop> {
             },
           ),
         ),
+        Padding(padding: EdgeInsets.only(top:25),)
       ],
     );
   }
